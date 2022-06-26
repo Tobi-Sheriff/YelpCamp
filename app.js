@@ -152,15 +152,12 @@ app.use((req, res, next) => {
     next();
 })
 
-
-app.use('/', userRoutes);
-app.use('/campgrounds', campgroundRoutes)
-app.use('/campgrounds/:id/reviews', reviewRoutes)
-
-
 app.get('/', (req, res) => {
     res.render('home')
 });
+app.use('/', userRoutes);
+app.use('/campgrounds', campgroundRoutes)
+app.use('/campgrounds/:id/reviews', reviewRoutes)
 
 
 app.all('*', (req, res, next) => {
