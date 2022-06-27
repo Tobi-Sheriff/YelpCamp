@@ -21,7 +21,7 @@ const reviewRoutes = require('./routes/reviews');
 
 const MongoDBStore = require("connect-mongo")(session);
 
-const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelp-camp';
+// const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelp-camp';
 
 const mongoAdd = {
     useNewUrlParser: true,
@@ -29,7 +29,7 @@ const mongoAdd = {
     useUnifiedTopology: true
     // useFindAndModify: false
 }
-mongoose.connect(dbUrl, mongoAdd)
+mongoose.connect('mongodb://localhost:27017/yelp-camp', mongoAdd)
     .then(() => {
         console.log('CONNECTION OPEN!');
     })
@@ -65,7 +65,7 @@ app.use(mongoSanitize({
 const secret = process.env.SECRET || 'thisshouldbeabettersecret!';
 
 const store = new MongoDBStore({
-    url: dbUrl,
+    url: 'mongodb://localhost:27017/yelp-camp',
     secret,
     touchAfter: 24 * 60 * 60
 });
@@ -129,7 +129,7 @@ app.use(
                 "'self'",
                 "blob:",
                 "data:",
-                "https://res.cloudinary.com/douqbebwk/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT! 
+                "https://res.cloudinary.com/dfh1oel6o/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT! 
                 "https://images.unsplash.com/",
             ],
             fontSrc: ["'self'", ...fontSrcUrls],
