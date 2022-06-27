@@ -1,4 +1,4 @@
-const bsCustomFileInput = require('bs-custom-file-input');
+// const bsCustomFileInput = require('bs-custom-file-input');
 
 (function () {
     'use strict'
