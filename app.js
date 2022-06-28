@@ -71,7 +71,7 @@ const store = new MongoDBStore({
 });
 
 store.on("error", function (e) {
-    console.log("SESSION STORE ERROR", e)
+    console.log("SESSION STORE ERROR", e);
 })
 
 const sessionConfig = {
@@ -186,7 +186,9 @@ app.all('*', (req, res, next) => {
 app.use((err, req, res, next) => {
     const { statusCode = 500 } = err;
     if (!err.message) err.message = 'Oh No, Something Went Wrong!'
-    res.status(statusCode).render('error', { err })
+    res.status(statusCode).render('error', { err });
+    // console.log('error', { err });
+    // console.log('error', { err });
 })
 
 const port = process.env.PORT || 3000;
