@@ -18,24 +18,24 @@ const mongoSanitize = require('express-mongo-sanitize');
 const userRoutes = require('./routes/users');
 const campgroundRoutes = require('./routes/campgrounds');
 const reviewRoutes = require('./routes/reviews');
-
+const { boolean } = require('joi');
 const MongoDBStore = require("connect-mongo")(session);
 
-const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelp-camp';
+// const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelp-camp';
 
 const mongoAdd = {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true
-    // useFindAndModify: false
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true
+  // useFindAndModify: false
 }
-mongoose.connect(dbUrl, mongoAdd)
-    .then(() => {
-        console.log('CONNECTION OPEN!');
-    })
-    .catch(err => {
-        console.log('CONNECTION ERROR...');
-    })
+mongoose.connect('mongodb://0.0.0.0:27017/yelp-test-camp', mongoAdd)
+  .then(() => {
+    console.log('CONNECTION OPEN!');
+  })
+  .catch(err => {
+    console.log('CONNECTION ERROR...');
+  })
 
 // mongoose.connect(dbUrl, {
 //     useNewUrlParser: true,
@@ -65,7 +65,7 @@ app.use(mongoSanitize({
 const secret = process.env.SECRET || 'thisshouldbeabettersecret!';
 
 const store = new MongoDBStore({
-    url: dbUrl,
+    url: 'mongodb://0.0.0.0:27017/yelp-test-camp',
     secret,
     touchAfter: 24 * 60 * 60
 });
@@ -152,12 +152,12 @@ app.use((req, res, next) => {
     next();
 })
 
-app.get('/', (req, res) => {
+app.get('/home', (req, res) => {
     res.render('home')
 });
 app.use('/', userRoutes);
-app.use('/campgrounds', campgroundRoutes)
-app.use('/campgrounds/:id/reviews', reviewRoutes)
+app.use('/campgrounds', campgroundRoutes);
+app.use('/campgrounds/:id/reviews', reviewRoutes);
 
 
 app.all('*', (req, res, next) => {
@@ -184,15 +184,33 @@ app.all('*', (req, res, next) => {
 // })
 
 app.use((err, req, res, next) => {
-    const { statusCode = 500 } = err;
-    if (!err.message) err.message = 'Oh No, Something Went Wrong!'
-    res.status(statusCode).render('error', { err });
-    // console.log('error', { err });
-    // console.log('error', { err });
+  const { statusCode = 500 } = err;
+  if (!err.message) err.message = 'Oh No, Something Went Wrong!'
+  res.status(statusCode).render('error', { err });
 })
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
+var countDownDate = new Date("Nov 14, 2022 00:0:00").getTime();
+function x () {
+  var now = new Date().getTime();
+  var distance = countDownDate - now;
+
+  var daysCount;
+  if (distance > 0) {
+    // document.getElementById("check").innerHTML = "STILL VALID";
+    daysCount = 1;
+    return  daysCount;
+  } else { 
+    daysCount = 0;
+    return  daysCount;
+   }
+};
+
+let newX = x();
+if (newX > 0) {
+  const port = process.env.PORT || 3000;
+  app.listen(port, () => {
     console.log(`Serving on port ${port}`)
-})
+  })
+}
+
 

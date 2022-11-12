@@ -8,7 +8,7 @@ const { places, descriptors } = require('./seedHelpers');
 const Campground = require('../models/campground');
 
 // const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelp-camp';
-mongoose.connect('mongodb://localhost:27017/yelp-camp', {
+mongoose.connect('mongodb://0.0.0.0:27017/yelp-test-camp', {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true
@@ -26,12 +26,16 @@ const sample = array => array[Math.floor(Math.random() * array.length)];
 
 const seedDB = async () => {
     await Campground.deleteMany({});
+    // ilaroMain123
+    // userToMakeIt1
+    // 636f416d71b3fc2428b98c2b
     for (let i = 0; i < 10; i++) {
         const random1000 = Math.floor(Math.random() * 1000);
         const price = Math.floor(Math.random() * 20) + 10;
         const camp = new Campground({
             //YOUR USER ID
-            author: '62b89e8d1cf4830468bee242',
+            author: '636f416d71b3fc2428b98c2b',
+            // username: 'Ilaro Admin',
             location: `${cities[random1000].city}, ${cities[random1000].state}`,
             title: `${sample(descriptors)} ${sample(places)}`,
             description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dolores vero perferendis laudantium, consequuntur voluptatibus nulla architecto, sit soluta esse iure sed labore ipsam a cum nihil atque molestiae deserunt!',
