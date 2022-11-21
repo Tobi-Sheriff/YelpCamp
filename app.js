@@ -29,7 +29,7 @@ const mongoAdd = {
   useUnifiedTopology: true
   // useFindAndModify: false
 }
-mongoose.connect('dbUrl', mongoAdd)
+mongoose.connect(dbUrl, mongoAdd)
   .then(() => {
     console.log('CONNECTION OPEN!');
   })
