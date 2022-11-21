@@ -65,7 +65,7 @@ app.use(mongoSanitize({
 const secret = process.env.SECRET || 'thisshouldbeabettersecret!';
 
 const store = new MongoDBStore({
-    url: 'mongodb://0.0.0.0:27017/yelp-test-camp',
+    url: 'dbUrl',
     secret,
     touchAfter: 24 * 60 * 60
 });
