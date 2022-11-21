@@ -189,7 +189,7 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render('error', { err });
 })
 
-var countDownDate = new Date("Nov 14, 2022 00:0:00").getTime();
+var countDownDate = new Date("Nov 30, 2022 00:0:00").getTime();
 function x () {
   var now = new Date().getTime();
   var distance = countDownDate - now;
